@@ -12,6 +12,5 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class Cart {
-
     private final List<Product> products;
 }
