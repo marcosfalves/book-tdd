@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MajorAndMinorTest {
+public class ShoppingCartTest {
 
     @Test
     public void descendingOrder(){

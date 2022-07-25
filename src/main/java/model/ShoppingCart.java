@@ -18,4 +18,16 @@ public class ShoppingCart {
     public List<Item> getItems(){
         return Collections.unmodifiableList(items);
     }
+
+    public double highestTotalValue() {
+        if (getItems().isEmpty()) return 0;
+        double major = getItems().get(0).getTotalValue();
+
+        for (Item item : getItems()) {
+            if (major < item.getTotalValue()){
+                major = item.getTotalValue();
+            }
+        }
+        return major;
+    }
 }
