@@ -2,43 +2,35 @@ package service;
 
 import static org.junit.Assert.*;
 
-import model.Cart;
-import model.Product;
+import model.Item;
+import model.ShoppingCart;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShoppingCartTest {
 
     @Test
-    public void descendingOrder(){
-        List<Product> products = new ArrayList<>();
-        products.add(Product.builder().id("1").name("Geladeira").price(450.00).build());
-        products.add(new Product("2", "Liquidificador", 250.00));
-        products.add(new Product("3", "Jogo de pratos", 70.00));
+    public void shouldReturnZeroWhenShoppingCartIsEmpty() {
+        ShoppingCart cart = new ShoppingCart();
 
-        Cart cart = new Cart(products);
-
-        MajorAndMinor algoritm = new MajorAndMinor();
-        algoritm.findMajorAndMinor(cart);
-
-        assertEquals("Jogo de pratos", algoritm.getMinor().getName());
-        assertEquals("Geladeira", algoritm.getMajor().getName());
+        assertEquals(0.0, cart.highestTotalValue(), 0.0001);
     }
 
     @Test
-    public void onlyOneProduct(){
-        List<Product> products = new ArrayList<>();
-        products.add(Product.builder().id("1").name("Geladeira").price(450.00).build());
+    public void shouldReturnItemAmountWhenShoppingCartHasOneElement(){
+        ShoppingCart cart = new ShoppingCart();
+        cart.add(new Item("Refrigerator", 1, 900.00));
 
-        Cart cart = new Cart(products);
+        assertEquals(900.00, cart.highestTotalValue(), 0.0001);
+    }
 
-        MajorAndMinor algoritm = new MajorAndMinor();
-        algoritm.findMajorAndMinor(cart);
+    @Test
+    public void shouldReturnMajorAmountWhenShoppingCartHasManyElements(){
+        ShoppingCart cart = new ShoppingCart();
+        cart.add(new Item("Refrigerator", 1, 900.00));
+        cart.add(new Item("Stove", 1, 1500.00));
+        cart.add(new Item("Washer", 1, 750.00));
 
-        assertEquals("Geladeira", algoritm.getMinor().getName());
-        assertEquals("Geladeira", algoritm.getMajor().getName());
+        assertEquals(1500.00, cart.highestTotalValue(), 0.0001);
     }
 
 }
