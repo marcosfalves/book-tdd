@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class SalaryCalculatorTest {
 
     @Test
-    public void ShouldCalculateSalaryForDevelopersWithSalaryBelowLimit(){
+    public void shouldCalculateSalaryForDevelopersWithSalaryBelowLimit(){
         SalaryCalculator calculator = new SalaryCalculator();
         Functionary developer = new Functionary("Marcos", 1500.00, Role.DEVELOPER);
 
@@ -19,7 +19,7 @@ public class SalaryCalculatorTest {
     }
 
     @Test
-    public void ShouldCalculateSalaryForDevelopersWithSalaryAboveLimit(){
+    public void shouldCalculateSalaryForDevelopersWithSalaryAboveLimit(){
         SalaryCalculator calculator = new SalaryCalculator();
         Functionary developer = new Functionary("Marcos", 4000.00, Role.DEVELOPER);
 
@@ -29,13 +29,43 @@ public class SalaryCalculatorTest {
     }
 
     @Test
-    public void ShouldCalculateSalaryForDBAWithSalaryBelowLimit(){
+    public void shouldCalculateSalaryForDBAWithSalaryBelowLimit(){
         SalaryCalculator calculator = new SalaryCalculator();
-        Functionary developer = new Functionary("Marcos", 500.00, Role.DBA);
+        Functionary developer = new Functionary("Marcos", 1500.00, Role.DBA);
 
         double salary = calculator.calculateSalary(developer);
 
-        assertEquals(500.00 * 0.85, salary, 0.00001);
+        assertEquals(1500.00 * 0.85, salary, 0.00001);
+    }
+
+    @Test
+    public void shouldCalculateSalaryForDBAWithSalaryAboveLimit(){
+        SalaryCalculator calculator = new SalaryCalculator();
+        Functionary developer = new Functionary("Marcos", 4500.00, Role.DBA);
+
+        double salary = calculator.calculateSalary(developer);
+
+        assertEquals(4500.00 * 0.75, salary, 0.00001);
+    }
+
+    @Test
+    public void shouldCalculateSalaryForTesterWithSalaryBelowLimit(){
+        SalaryCalculator calculator = new SalaryCalculator();
+        Functionary developer = new Functionary("Marcos", 1500.00, Role.TESTER);
+
+        double salary = calculator.calculateSalary(developer);
+
+        assertEquals(1500.00 * 0.85, salary, 0.00001);
+    }
+
+    @Test
+    public void shouldCalculateSalaryForTesterWithSalaryAboveLimit(){
+        SalaryCalculator calculator = new SalaryCalculator();
+        Functionary developer = new Functionary("Marcos", 4500.00, Role.TESTER);
+
+        double salary = calculator.calculateSalary(developer);
+
+        assertEquals(4500.00 * 0.75, salary, 0.00001);
     }
 
 }
