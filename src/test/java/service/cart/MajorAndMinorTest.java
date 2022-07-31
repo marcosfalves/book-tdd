@@ -1,10 +1,11 @@
-package service;
+package service.cart;
 
 import static org.junit.Assert.*;
 
-import model.Cart;
-import model.Product;
+import model.cart.Cart;
+import model.cart.Product;
 import org.junit.Test;
+import service.cart.MajorAndMinor;
 
 import java.util.ArrayList;
 import java.util.List;

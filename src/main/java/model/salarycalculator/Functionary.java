@@ -1,4 +1,4 @@
-package model;
+package model.salarycalculator;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

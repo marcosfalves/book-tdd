@@ -1,7 +1,7 @@
 package builders;
 
-import model.Item;
-import model.ShoppingCart;
+import model.shoppingcart.Item;
+import model.shoppingcart.ShoppingCart;
 
 public class ShoppingCartBuilder {
 

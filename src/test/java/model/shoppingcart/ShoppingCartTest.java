@@ -1,8 +1,8 @@
-package service;
+package model.shoppingcart;
 
 import builders.ShoppingCartBuilder;
-import model.Item;
-import model.ShoppingCart;
+import model.shoppingcart.Item;
+import model.shoppingcart.ShoppingCart;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,7 +1,6 @@
-package service;
+package service.salarycalculator;
 
-import model.Functionary;
-import model.Role;
+import model.salarycalculator.Functionary;
 
 public class SalaryCalculator {
 

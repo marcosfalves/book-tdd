@@ -1,4 +1,4 @@
-package model;
+package model.shoppingcart;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

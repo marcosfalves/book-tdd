@@ -1,8 +1,8 @@
-package service;
+package service.cart;
 
 import lombok.Getter;
-import model.Cart;
-import model.Product;
+import model.cart.Cart;
+import model.cart.Product;
 
 @Getter
 public class MajorAndMinor {

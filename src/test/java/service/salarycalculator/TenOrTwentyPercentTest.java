@@ -1,9 +1,10 @@
-package service;
+package service.salarycalculator;
 
-import model.Functionary;
-import model.Role;
+import model.salarycalculator.Functionary;
+import model.salarycalculator.Role;
 import org.junit.Before;
 import org.junit.Test;
+import service.salarycalculator.TenOrTwentyPercent;
 
 import static org.junit.Assert.*;
 

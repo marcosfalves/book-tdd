@@ -1,8 +1,8 @@
-package model;
+package model.salarycalculator;
 
-import service.CalculationRule;
-import service.FifteenOrTwentyFivePercent;
-import service.TenOrTwentyPercent;
+import service.salarycalculator.CalculationRule;
+import service.salarycalculator.FifteenOrTwentyFivePercent;
+import service.salarycalculator.TenOrTwentyPercent;
 
 public enum Role {
     DEVELOPER(new TenOrTwentyPercent()),
