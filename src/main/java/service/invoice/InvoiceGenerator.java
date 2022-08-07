@@ -4,15 +4,14 @@ import model.invoice.Invoice;
 import model.invoice.Order;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class InvoiceGenerator {
 
-    private InvoiceDao dao;
-    private SAP sap;
+    private final List<ActionAfterGeneratingInvoice> actions;
 
-    public InvoiceGenerator(InvoiceDao dao, SAP sap) {
-        this.dao = dao;
-        this.sap = sap;
+    public InvoiceGenerator(List<ActionAfterGeneratingInvoice> actions) {
+        this.actions = actions;
     }
 
     public Invoice generates(Order order) {
@@ -22,8 +21,9 @@ public class InvoiceGenerator {
                 LocalDate.now()
         );
 
-        dao.persist(invoice);
-        sap.send(invoice);
+        for (ActionAfterGeneratingInvoice action : actions){
+            action.execute(invoice);
+        }
 
         return invoice;
     }

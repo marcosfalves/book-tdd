@@ -7,14 +7,13 @@ import model.invoice.Invoice;
 import model.invoice.Order;
 import org.junit.Test;
 
+import java.util.List;
+
 public class InvoiceGeneratorTest {
 
     @Test
     public void shouldGenerateInvoiceWithDiscountedTaxValue() {
-        InvoiceDao dao = mock(InvoiceDao.class);
-        SAP sap = mock(SAP.class);
-
-        InvoiceGenerator generator = new InvoiceGenerator(dao, sap);
+        InvoiceGenerator generator = new InvoiceGenerator(List.of());
         Order order = new Order("Marcos", 1000, 1);
 
         Invoice invoice = generator.generates(order);
@@ -23,30 +22,17 @@ public class InvoiceGeneratorTest {
     }
 
     @Test
-    public void shouldPersistInvoice(){
-        //mock create
-        InvoiceDao dao = mock(InvoiceDao.class);
-        SAP sap = mock(SAP.class);
+    public void shouldInvokeActionsAfterGeneratingInvoice(){
+        ActionAfterGeneratingInvoice action1 = mock(ActionAfterGeneratingInvoice.class);
+        ActionAfterGeneratingInvoice action2 = mock(ActionAfterGeneratingInvoice.class);
 
-        InvoiceGenerator generator = new InvoiceGenerator(dao, sap);
+        InvoiceGenerator generator = new InvoiceGenerator(List.of(action1, action2));
         Order order = new Order("Marcos", 1000, 1);
 
         Invoice invoice = generator.generates(order);
 
         //verifying that the method was invoked
-        verify(dao).persist(invoice);
-    }
-
-    @Test
-    public void shouldSendGeneratedInvoiceToSAP(){
-        InvoiceDao dao = mock(InvoiceDao.class);
-        SAP sap = mock(SAP.class);
-
-        InvoiceGenerator generator = new InvoiceGenerator(dao, sap);
-        Order order = new Order("Marcos", 1000, 1);
-
-        Invoice invoice = generator.generates(order);
-
-        verify(sap).send(invoice);
+        verify(action1).execute(invoice);
+        verify(action2).execute(invoice);
     }
 }
