@@ -1,18 +1,18 @@
 package service.invoice;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import model.invoice.Invoice;
 import model.invoice.Order;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 public class InvoiceGeneratorTest {
 
     @Test
     public void shouldGenerateInvoiceWithDiscountedTaxValue() {
-        InvoiceDao dao = Mockito.mock(InvoiceDao.class);
-        SAP sap = Mockito.mock(SAP.class);
+        InvoiceDao dao = mock(InvoiceDao.class);
+        SAP sap = mock(SAP.class);
 
         InvoiceGenerator generator = new InvoiceGenerator(dao, sap);
         Order order = new Order("Marcos", 1000, 1);
@@ -25,8 +25,8 @@ public class InvoiceGeneratorTest {
     @Test
     public void shouldPersistInvoice(){
         //mock create
-        InvoiceDao dao = Mockito.mock(InvoiceDao.class);
-        SAP sap = Mockito.mock(SAP.class);
+        InvoiceDao dao = mock(InvoiceDao.class);
+        SAP sap = mock(SAP.class);
 
         InvoiceGenerator generator = new InvoiceGenerator(dao, sap);
         Order order = new Order("Marcos", 1000, 1);
@@ -34,19 +34,19 @@ public class InvoiceGeneratorTest {
         Invoice invoice = generator.generates(order);
 
         //verifying that the method was invoked
-        Mockito.verify(dao).persist(invoice);
+        verify(dao).persist(invoice);
     }
 
     @Test
     public void shouldSendGeneratedInvoiceToSAP(){
-        InvoiceDao dao = Mockito.mock(InvoiceDao.class);
-        SAP sap = Mockito.mock(SAP.class);
+        InvoiceDao dao = mock(InvoiceDao.class);
+        SAP sap = mock(SAP.class);
 
         InvoiceGenerator generator = new InvoiceGenerator(dao, sap);
         Order order = new Order("Marcos", 1000, 1);
 
         Invoice invoice = generator.generates(order);
 
-        Mockito.verify(sap).send(invoice);
+        verify(sap).send(invoice);
     }
 }
