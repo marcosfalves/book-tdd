@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import model.invoice.Invoice;
 import model.invoice.Order;
+import model.invoice.TableTax;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
@@ -49,5 +50,20 @@ public class InvoiceGeneratorTest {
         Invoice invoice = generator.generates(order);
 
         assertEquals(DayOfWeek.MONDAY, invoice.getDate().getDayOfWeek());
+    }
+
+    @Test
+    public void shouldFindTableTaxForCalculateValue(){
+        TableTax tableTax = mock(TableTax.class);
+
+        when(tableTax.forValue(1000.00)).thenReturn(0.2);
+
+        InvoiceGenerator generator = new InvoiceGenerator(List.of(), tableTax);
+        Order order = new Order("Marcos", 1000, 1);
+
+        Invoice invoice = generator.generates(order);
+
+        verify(tableTax).forValue(1000.000);
+        assertEquals(1000 * 0.2, invoice.getValue(), 0.0001);
     }
 }
