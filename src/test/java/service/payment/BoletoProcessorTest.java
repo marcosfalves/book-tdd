@@ -47,15 +47,4 @@ public class BoletoProcessorTest  {
         assertEquals(100.00, charge.getPayments().get(0).getValue(), 0.00001);
         assertEquals(200.00, charge.getPayments().get(1).getValue(), 0.00001);
     }
-
-    @Test
-    public void shouldMarkChargeHowToPaidWhenSingleBoletoAllPaid(){
-        Charge charge = new Charge("Customer", 150.00);
-        Boleto b1 = new Boleto(150.00);
-        List<Boleto> boletos = List.of(b1);
-
-        boletoProcessor.process(boletos, charge);
-
-        assertTrue(charge.isPaid());
-    }
 }

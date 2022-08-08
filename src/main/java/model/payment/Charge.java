@@ -21,4 +21,17 @@ public class Charge {
         this.value = value;
         this.payments = new ArrayList<>();
     }
+
+    public void addPayment(Payment payment) {
+        this.payments.add(payment);
+
+        double totalPaid = 0.0;
+        for (Payment p: payments){
+            totalPaid += p.getValue();
+        }
+
+        if (totalPaid >= this.value){
+            this.paid = true;
+        }
+    }
 }
